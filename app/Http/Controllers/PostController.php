@@ -119,7 +119,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Post::findOrFail($id);
+        Storage::delete($item->preview);
+        $item->delete();
+        return response()->json($item);
     }
 
     /**
