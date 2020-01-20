@@ -5,3 +5,11 @@
 form.create-edit {
 	margin-bottom: 75px;
 }
+
+img {
+	max-width: 100%;
+}
+
+.image-gap {
+	margin-top: 30px;
+}
