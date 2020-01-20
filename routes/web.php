@@ -21,4 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('posts', 'PostController');
+	Route::post('upload-editor', 'PostController@uploadEditor')->name('image.editor');
 });

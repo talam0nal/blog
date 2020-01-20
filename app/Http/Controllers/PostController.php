@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -83,4 +84,20 @@ class PostController extends Controller
     {
         //
     }
+
+    /**
+     * Загрузка картинки для редактора
+    */
+    public function uploadEditor()
+    {
+        $path = request()->file('image')->store('public/uploads/editor');
+        $url = Storage::url($path);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Image uploaded',
+            'data' => ['link' => $url],
+        ]);
+    }
+
 }

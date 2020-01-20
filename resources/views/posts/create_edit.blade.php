@@ -53,6 +53,13 @@
     <script src="/assets/js/trumbowyg/trumbowyg.upload.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/ru.js"></script>
     <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
         $(function() {
             $('textarea').trumbowyg({
 
@@ -80,7 +87,7 @@
 
                 plugins: {
                     upload: {
-                        serverPath: 'route("image.editor")',
+                        serverPath: '{{ route("image.editor") }}',
                         fileFieldName: 'image',
                         urlPropertyName: 'data.link'
                     }
