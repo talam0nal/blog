@@ -45,7 +45,11 @@
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $item->category->title }}
+                                        @if ($item->category)
+                                            {{ $item->category->title }}
+                                            @else
+                                            Без категории
+                                        @endif
                                     </td>
                                     <td>
                                         {{ $item->created_at }}
