@@ -30,7 +30,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $item = false;
+        $vars = compact('item');
+        return view('categories.create_edit', $vars);
     }
 
     /**
@@ -41,7 +43,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = Category::create([
+            'title' => $request->title,
+        ]);
+        return redirect()->route('categories.edit', $item->id);
     }
 
     /**
@@ -63,7 +68,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Category::findOrFail($id);
+        $vars = compact('item');
+        return view('categories.create_edit', $vars);
     }
 
     /**
@@ -75,7 +82,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Category::findOrFail($id);
+        $item->update([
+            'title'       => $request->title,
+        ]);
+        return redirect()->route('categories.edit', $item->id);
     }
 
     /**
