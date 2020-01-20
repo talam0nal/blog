@@ -46,8 +46,9 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'user_id'     => \Auth::id(),
         ]);
+        $this->savePreview($item->id);
         return redirect()->route('posts.edit', $item->id);
-        //tags and preview
+        //tags
     }
 
     /**
@@ -84,7 +85,6 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $item = Post::findOrFail($id);
-
         $item->update([
             'title'       => $request->title,
             'subtitle'    => $request->subtitle,
