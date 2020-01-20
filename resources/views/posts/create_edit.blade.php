@@ -3,7 +3,8 @@
 @section ('content')
     <div class="container register-block">
         <div class="row">
-            <div class="col-sm-3">
+
+            <aside class="col-sm-3">
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action active">
                         Публикации
@@ -15,9 +16,10 @@
                         Категории
                     </a>
                 </div>
-            </div>
+            </aside>
+
             <div class="col-sm-9">
-                <form>
+                <form class="create-edit">
                     <div class="form-group">
                         <label for="title">
                             Заголовок
@@ -43,15 +45,31 @@
                         <label for="text">Текст публикации</label>
                         <textarea id="text" name="text" class="form-control" id="text" rows="3"></textarea>
                     </div>
+
+                    <label for="category">Категория:</label>
+                    <select class="form-control" name="category_id">
+                      <option>Default select</option>
+                    </select>
+
+                    <div class="form-group">
+                        <label for="tags">
+                            Теги:
+                        </label>
+                        <input name="tags" type="text" class="form-control" id="tags">
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Сохранить</button>
                 </form>
             </div>
         </div>
     </div>
 
     <link rel="stylesheet" href="/assets/css/trumbowyg.min.css">
+    <link rel="stylesheet" href="/assets/css/jquery.tagsinput-revisited.min.css">
     <script src="/assets/js/trumbowyg/trumbowyg.min.js"></script>
     <script src="/assets/js/trumbowyg/trumbowyg.upload.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/ru.js"></script>
+    <script src="/assets/js/jquery.tagsinput-revisited.min.js"></script>
     <script>
 
         $.ajaxSetup({
@@ -59,8 +77,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $(function() {
+            $('#tags').tagsInput({
+                unique:true,
+            });
+
             $('textarea').trumbowyg({
 
                 btnsDef: {
