@@ -50,10 +50,14 @@
                         <textarea id="text" name="text" class="form-control" id="text" rows="3">@if ($item){{ $item->text }}@endif</textarea>
                     </div>
 
-                    <label for="category">Категория:</label>
-                    <select class="form-control" name="category_id">
-                        <option value="1">Default select</option>
-                    </select>
+                    @if (count($categories))
+                        <label for="category">Категория:</label>
+                        <select class="form-control" name="category_id">
+                            @foreach ($categories as $category)
+                                <option @if ($item->category_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endif
+                        </select>
+                    @endif
 
                     <div class="form-group">
                         <label for="tags">

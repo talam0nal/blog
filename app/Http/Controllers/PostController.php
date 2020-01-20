@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,9 +26,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //categories
         $item = false;
-        $vars = compact('item');
+        $categories = Category::get();
+        $vars = compact('item', 'categories');
         return view('posts.create_edit', $vars);
     }
 
@@ -71,7 +72,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $item = Post::findOrFail($id);
-        $vars = compact('item');
+        $categories = Category::get();
+        $vars = compact('item', 'categories');
         return view('posts.create_edit', $vars);
     }
 
