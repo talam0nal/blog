@@ -12,5 +12,6 @@ class Post extends Model
         'preview',
         'text',
         'category_id',
+        'user_id',
     ];
 }
