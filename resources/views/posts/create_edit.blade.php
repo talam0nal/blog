@@ -4,19 +4,7 @@
     <div class="container register-block">
         <div class="row">
 
-            <aside class="col-sm-3">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active">
-                        Публикации
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        Комментарии
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        Категории
-                    </a>
-                </div>
-            </aside>
+            @include ('partials.menu')
 
             <div class="col-sm-9">
                 @if ($item)
