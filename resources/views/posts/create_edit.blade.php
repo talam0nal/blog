@@ -19,7 +19,13 @@
             </aside>
 
             <div class="col-sm-9">
-                <form class="create-edit">
+                @if ($item)
+                    <form class="create-edit" method="POST" action="{{ route('posts.update', $item->id) }}">
+                        @method('PUT')
+                    @else
+                    <form class="create-edit" method="POST" action="{{ route('posts.store') }}">
+                @endif
+                    @csrf
                     <div class="form-group">
                         <label for="title">
                             Заголовок
