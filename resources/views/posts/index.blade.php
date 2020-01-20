@@ -67,7 +67,7 @@
                                         <a href="{{ route('posts.edit', $item->id) }}">
                                             Редактировать
                                         </a>
-                                        <a href="#">
+                                        <a href="#" class="remove-post" data-id="{{ $item->id }}">
                                             Удалить
                                         </a>
                                     </td>
@@ -78,5 +78,24 @@
                 @endif
             </div>
 
-        </div>    
+        </div>
+
+        <script>
+            $(function() {
+
+                $('.remove-post').click(function(e) {
+                    event.preventDefault();
+                    el = $(this);
+                    id = el.attr('data-id');
+                    $.ajax({
+                        url: '/posts/'+id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            el.parents('tr').remove();
+                        }
+                    });
+                });
+
+            });
+        </script>    
 @endsection
