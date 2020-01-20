@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('posts', 'PostController');
+	Route::resource('categories', 'CategoryController');
 	Route::post('upload-editor', 'PostController@uploadEditor')->name('image.editor');
 });
