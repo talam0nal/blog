@@ -53,8 +53,9 @@
                     @if (count($categories))
                         <label for="category">Категория:</label>
                         <select class="form-control" name="category_id">
+                            <option value="">Без категории</option>
                             @foreach ($categories as $category)
-                                <option @if ($item->category_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->title }}</option>
+                                <option @if ($item) @if ($item->category_id == $category->id) selected @endif @endif value="{{ $category->id }}">{{ $category->title }}</option>
                             @endforeach
                         </select>
                     @endif
@@ -79,12 +80,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.20.0/langs/ru.js"></script>
     <script src="/assets/js/jquery.tagsinput-revisited.min.js"></script>
     <script>
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
         $(function() {
             $('#tags').tagsInput({
