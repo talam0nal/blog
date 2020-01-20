@@ -20,24 +20,24 @@
 
             <div class="col-sm-9">
                 @if ($item)
-                    <form class="create-edit" method="POST" action="{{ route('posts.update', $item->id) }}">
+                    <form class="create-edit" method="POST" action="{{ route('posts.update', $item->id) }}" enctype="multipart/form-data">
                         @method('PUT')
                     @else
-                    <form class="create-edit" method="POST" action="{{ route('posts.store') }}">
+                    <form class="create-edit" method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                 @endif
                     @csrf
                     <div class="form-group">
                         <label for="title">
                             Заголовок
                         </label>
-                        <input name="title" placeholder="Введите заголовок" type="text" class="form-control" id="title" required>
+                        <input value="@if ($item){{ $item->title }}@endif" name="title" placeholder="Введите заголовок" type="text" class="form-control" id="title" required>
                     </div>
 
                     <div class="form-group">
                         <label for="subtitle">
                             Подзаголовок
                         </label>
-                        <input name="subtitle" placeholder="Введите подзаголовок" type="text" class="form-control" id="subtitle">
+                        <input value="@if ($item){{ $item->subtitle }}@endif" name="subtitle" placeholder="Введите подзаголовок" type="text" class="form-control" id="subtitle">
                     </div>
 
                     <div class="form-group">
@@ -45,23 +45,33 @@
                             Изображение
                         </label>
                         <input type="file" name="preview" class="form-control-file" id="preview">
+
+                        @if ($item)
+                            @if ($item->preview)
+                                <div class="row image-gap">
+                                    <div class="col-sm-6">
+                                        <img src="{{ Storage::url($item->preview) }}">
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
 
                     <div class="form-group">
                         <label for="text">Текст публикации</label>
-                        <textarea id="text" name="text" class="form-control" id="text" rows="3"></textarea>
+                        <textarea id="text" name="text" class="form-control" id="text" rows="3">@if ($item){{ $item->text }}@endif</textarea>
                     </div>
 
                     <label for="category">Категория:</label>
                     <select class="form-control" name="category_id">
-                      <option>Default select</option>
+                        <option value="1">Default select</option>
                     </select>
 
                     <div class="form-group">
                         <label for="tags">
                             Теги:
                         </label>
-                        <input name="tags" type="text" class="form-control" id="tags">
+                        <input value="123, 431" name="tags" type="text" class="form-control" id="tags">
                     </div>
 
                     <button type="submit" class="btn btn-success">Сохранить</button>

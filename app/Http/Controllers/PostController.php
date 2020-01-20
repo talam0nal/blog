@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,6 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        //categories
         $item = false;
         $vars = compact('item');
         return view('posts.create_edit', $vars);
@@ -37,7 +39,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = Post::create([
+            'title'       => $request->title,
+            'subtitle'    => $request->subtitle,
+            'text'        => $request->text,
+            'category_id' => $request->category_id,
+            'user_id'     => \Auth::id(),
+        ]);
+        return redirect()->route('posts.edit', $item->id);
+        //tags and preview
     }
 
     /**
@@ -59,7 +69,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Post::findOrFail($id);
+        $vars = compact('item');
+        return view('posts.create_edit', $vars);
     }
 
     /**
@@ -71,7 +83,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Post::findOrFail($id);
+
+        $item->update([
+            'title'       => $request->title,
+            'subtitle'    => $request->subtitle,
+            'text'        => $request->text,
+            'category_id' => $request->category_id,
+        ]);
+        $this->savePreview($id);
+        return redirect()->route('posts.edit', $item->id);
+    }
+
+    private function savePreview($id)
+    {
+        $item = Post::findOrFail($id);
+        if (request()->hasFile('preview')) {
+            $path = request()->file('preview')->store('public/previews');
+        } else {
+            $path = '';
+        }
+        $item->preview = $path;
+        $item->save();
     }
 
     /**
