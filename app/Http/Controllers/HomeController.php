@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function main()
     {
-        $posts = Post::paginate(1);
+        $posts = Post::paginate(10);
         $vars = compact('posts');
         return view('site.main', $vars);        
     }
