@@ -134,6 +134,11 @@ class PostController extends Controller
         return response()->json($item);
     }
 
+    public function byUser()
+    {
+        
+    }
+
     /**
      * Загрузка картинки для редактора
     */
