@@ -9,6 +9,9 @@
         <a href="{{ route('categories.index') }}" class="list-group-item list-group-item-action @if (module() == 'categories') active @endif">
             Категории
         </a>
+        <a href="/" class="list-group-item list-group-item-action">
+            Вернуться на сайт
+        </a>
         <a href="#" class="list-group-item list-group-item-action logout">
             Выйти
         </a>

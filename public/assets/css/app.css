@@ -13,3 +13,25 @@ img {
 .image-gap {
 	margin-top: 30px;
 }
+
+.search-input {
+	display: inline-block !important;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.main-menu {
+	margin-top: 20px;
+}
+
+.logo {
+	color: #000;
+	font-size: 35px;
+	margin-right: 20px;
+	position: relative;
+	top: 3px;
+}
+
+.logo:hover {
+	text-decoration: none;
+}

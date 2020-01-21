@@ -51,7 +51,6 @@ class PostController extends Controller
         ]);
         $this->savePreview($item->id);
         return redirect()->route('posts.edit', $item->id);
-        //tags
     }
 
     /**
