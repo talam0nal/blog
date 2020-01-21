@@ -12,11 +12,12 @@
 */
 
 Route::get('/', 'HomeController@main')->name('site.main');
+Route::get('/posts/{id}', 'PostController@show')->name('posts.show');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
-	Route::resource('posts', 'PostController');
-	Route::resource('categories', 'CategoryController');
+	Route::resource('posts', 'PostController')->except(['show']);
+	Route::resource('categories', 'CategoryController')->except(['show']);
 	Route::post('upload-editor', 'PostController@uploadEditor')->name('image.editor');
 });

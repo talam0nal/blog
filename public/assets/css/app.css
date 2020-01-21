@@ -12,6 +12,7 @@ img {
 
 .image-gap {
 	margin-top: 30px;
+	margin-bottom: 20px;
 }
 
 .search-input {
@@ -34,4 +35,17 @@ img {
 
 .logo:hover {
 	text-decoration: none;
+}
+
+.content {
+	margin-top: 50px;
+}
+
+.post {
+	margin-bottom: 35px;
+}
+
+.post .title {
+	font-size: 25px;
+	color: #000;
 }
