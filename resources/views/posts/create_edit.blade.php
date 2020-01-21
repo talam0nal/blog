@@ -64,7 +64,7 @@
                         <label for="tags">
                             Теги:
                         </label>
-                        <input value="123, 431" name="tags" type="text" class="form-control" id="tags">
+                        <input value="@if ($item){{ $item->tags }}@endif" name="tags" type="text" class="form-control" id="tags">
                     </div>
 
                     <button type="submit" class="btn btn-success">Сохранить</button>

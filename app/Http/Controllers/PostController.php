@@ -48,6 +48,7 @@ class PostController extends Controller
             'text'        => $request->text,
             'category_id' => $request->category_id,
             'user_id'     => \Auth::id(),
+            'tags'        => $request->tags,
         ]);
         $this->savePreview($item->id);
         return redirect()->route('posts.edit', $item->id);
@@ -61,7 +62,17 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Post::findOrFail($id);
+        $tags = $this->getTags($id);
+        $vars = compact('item', 'tags');
+        return view('posts.show', $vars);
+    }
+
+    private function getTags($id)
+    {
+        $item = Post::findOrFail($id);
+        $list = $item->tags;
+        return explode(',', $list);
     }
 
     /**
@@ -93,6 +104,7 @@ class PostController extends Controller
             'subtitle'    => $request->subtitle,
             'text'        => $request->text,
             'category_id' => $request->category_id,
+            'tags'        => $request->tags,
         ]);
         $this->savePreview($id);
         return redirect()->route('posts.edit', $item->id);

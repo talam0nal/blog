@@ -11,6 +11,7 @@
                 <a href="{{ route('posts.create') }}" class="btn btn-success">Написать статью</a>
                 @else
                 <a href="{{ route('login') }}">Войти</a>
+                <a href="{{ route('register') }}">Зарегистрироваться</a>
             @endauth
         </nav>
     </div>

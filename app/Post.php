@@ -13,6 +13,7 @@ class Post extends Model
         'text',
         'category_id',
         'user_id',
+        'tags',
     ];
 
     public function category()
