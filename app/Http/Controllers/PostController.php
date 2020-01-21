@@ -103,11 +103,9 @@ class PostController extends Controller
         $item = Post::findOrFail($id);
         if (request()->hasFile('preview')) {
             $path = request()->file('preview')->store('public/previews');
-        } else {
-            $path = '';
+            $item->preview = $path;
+            $item->save();
         }
-        $item->preview = $path;
-        $item->save();
     }
 
     /**
