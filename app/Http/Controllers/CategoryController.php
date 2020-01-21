@@ -84,7 +84,7 @@ class CategoryController extends Controller
     {
         $item = Category::findOrFail($id);
         $item->update([
-            'title'       => $request->title,
+            'title' => $request->title,
         ]);
         return redirect()->route('categories.edit', $item->id);
     }
