@@ -15,7 +15,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row post">
 			<div class="col-12">
 				{{ $item->created_at }}<br>
 				<h2>{{ $item->title }}</h2>
@@ -27,6 +27,7 @@
 			</article>
 
 			<div class="col-12">
+				<a href="">{{ $item->user->name }}</a><br><br>
 				@foreach ($tags as $tag)
 					<span class="badge badge-pill badge-info">{{ $tag }}</span>
 				@endforeach
