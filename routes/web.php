@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 	Route::resource('posts', 'PostController');
 	Route::resource('categories', 'CategoryController');
 	Route::post('upload-editor', 'PostController@uploadEditor')->name('image.editor');
