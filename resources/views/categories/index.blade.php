@@ -59,7 +59,7 @@
                     el = $(this);
                     id = el.attr('data-id');
                     $.ajax({
-                        url: '/categories/'+id,
+                        url: '/admin/categories/'+id,
                         type: 'DELETE',
                         success: function(result) {
                             el.parents('tr').remove();

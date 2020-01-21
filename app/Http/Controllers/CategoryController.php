@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $items = Category::get();
+        $items = Category::where('user_id', \Auth::id())->get();
         foreach ($items as $item) {
             $item->publicationsCount = Post::where('category_id', $item->id)->count();
         }
@@ -45,6 +45,7 @@ class CategoryController extends Controller
     {
         $item = Category::create([
             'title' => $request->title,
+            'user_id' => \Auth::id(),
         ]);
         return redirect()->route('categories.edit', $item->id);
     }

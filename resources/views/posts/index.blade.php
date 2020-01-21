@@ -101,7 +101,7 @@
                     el = $(this);
                     id = el.attr('data-id');
                     $.ajax({
-                        url: '/posts/'+id,
+                        url: '/admin/posts/'+id,
                         type: 'DELETE',
                         success: function(result) {
                             el.parents('tr').remove();
