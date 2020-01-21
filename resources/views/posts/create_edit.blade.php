@@ -32,7 +32,7 @@
                         <label for="preview">
                             Изображение
                         </label>
-                        <input type="file" name="preview" class="form-control-file" id="preview">
+                        <input type="file" name="preview" class="form-control-file" id="preview" accept="image/*">
 
                         @if ($item)
                             @if ($item->preview)
