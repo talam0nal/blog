@@ -9,5 +9,25 @@
         <a href="{{ route('categories.index') }}" class="list-group-item list-group-item-action @if (module() == 'categories') active @endif">
             Категории
         </a>
+        <a href="#" class="list-group-item list-group-item-action logout">
+            Выйти
+        </a>
     </div>
 </aside>
+
+<script>
+    $(function() {
+
+        $('.logout').click(function(e) {
+            event.preventDefault();
+            $.ajax({
+                url: '{{ route('logout') }}',
+                type: 'POST',
+                success: function(result) {
+                    window.location.href = '/';
+                }
+            });
+        });
+
+    });
+</script>
