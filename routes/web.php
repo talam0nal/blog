@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@main')->name('site.main');
 Route::get('/posts/{id}', 'PostController@show')->name('posts.show');
+Route::get('/user/{id}', 'PostController@byUser')->name('posts.user');
 Route::post('/posts/switch', 'PostController@switchPublish')->name('posts.switch');
 
 Auth::routes();

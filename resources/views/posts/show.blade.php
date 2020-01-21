@@ -2,6 +2,7 @@
 
 @section ('content')
 	@include ('partials.header')
+
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -27,7 +28,7 @@
 			</article>
 
 			<div class="col-12">
-				<a href="">{{ $item->user->name }}</a><br><br>
+				<a href="{{ route('posts.user', $item->user->id) }}">{{ $item->user->name }}</a><br><br>
 				@foreach ($tags as $tag)
 					<span class="badge badge-pill badge-info">{{ $tag }}</span>
 				@endforeach

@@ -134,9 +134,11 @@ class PostController extends Controller
         return response()->json($item);
     }
 
-    public function byUser()
+    public function byUser($id)
     {
-
+        $posts = Post::whereActive(1)->where('user_id', $id)->paginate(10);
+        $vars = compact('posts');
+        return view('posts.byuser', $vars);
     }
 
     public function switchPublish()

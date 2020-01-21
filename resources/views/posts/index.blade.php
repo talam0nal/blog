@@ -60,8 +60,12 @@
                                     <td>
                                         V
                                     </td>
-                                    <td>
-                                        S
+                                    <td class="status">
+                                        @if ($item->active)
+                                            Опубликовано
+                                            @else
+                                            Не опубликовано
+                                        @endif
                                     </td>
                                     <td>
                                         <a href="{{ route('posts.edit', $item->id) }}">
@@ -114,8 +118,10 @@
                         console.log(data);
                         if (data.active == 0) {
                             el.text('Опубликовать');
+                            el.parent('td').prev('.status').text('Не опубликовано');
                         } else {
                             el.text('Снять с публикации');
+                            el.parent('td').prev('.status').text('Опубликовано');
                         }
                     });
                 });
