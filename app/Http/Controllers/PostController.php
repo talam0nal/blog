@@ -136,7 +136,20 @@ class PostController extends Controller
 
     public function byUser()
     {
-        
+
+    }
+
+    public function switchPublish()
+    {
+        $id = request()->id;
+        $item = Post::findOrFail($id);
+        if ($item->active == 1) {
+            $item->active = 0;
+        } else {
+            $item->active = 1;
+        }
+        $item->save();
+        return response()->json($item);
     }
 
     /**

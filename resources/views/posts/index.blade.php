@@ -67,6 +67,15 @@
                                         <a href="{{ route('posts.edit', $item->id) }}">
                                             Редактировать
                                         </a>
+                                        @if ($item->active)
+                                            <a href="#" data-id="{{ $item->id }}" class="switch-publish">
+                                                Снять с публикации
+                                            </a>
+                                            @else
+                                            <a href="#" data-id="{{ $item->id }}" class="switch-publish">
+                                                Опубликовать
+                                            </a>
+                                        @endif
                                         <a href="#" class="remove-post" data-id="{{ $item->id }}">
                                             Удалить
                                         </a>
@@ -92,6 +101,21 @@
                         type: 'DELETE',
                         success: function(result) {
                             el.parents('tr').remove();
+                        }
+                    });
+                });
+
+                $('.switch-publish').click(function(e) {
+                    e.preventDefault();
+                    el = $(this);
+                    var id = el.attr('data-id');
+                    $.post("{{ route('posts.switch') }}", { id: id})
+                    .done(function(data) {
+                        console.log(data);
+                        if (data.active == 0) {
+                            el.text('Опубликовать');
+                        } else {
+                            el.text('Снять с публикации');
                         }
                     });
                 });
