@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use App\View;
+use App\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,6 +19,10 @@ class PostController extends Controller
     public function index()
     {
         $items = Post::get();
+        foreach ($items as $item) {
+            $item->countLikes = Like::getCountLike($item->id);
+            $item->countViews = View::getCountViews($item->id);
+        }
         $vars = compact('items');
         return view('posts.index', $vars);
     }
@@ -68,6 +73,7 @@ class PostController extends Controller
         $vars = compact('item', 'tags');
         $this->increaseViews($id);
         $item->countViews = View::getCountViews($id);
+        $item->countLikes = Like::getCountLike($id);
         return view('posts.show', $vars);
     }
 
@@ -76,9 +82,26 @@ class PostController extends Controller
         $viewed = View::where('post_id', $id)->where('ip', request()->ip())->count();
         if (!$viewed) {
             View::create([
-                'ip' => request()->ip(),
+                'ip'      => request()->ip(),
                 'post_id' => $id,
             ]);
+        }
+    }
+
+    public function like()
+    {
+        $id = request()->id;
+        $liked = Like::where('post_id', $id)->where('ip', request()->ip())->count();
+        if (!$liked) {
+            Like::create([
+                'ip'      => request()->ip(),
+                'post_id' => $id,
+            ]);
+            return response()->json(['liked' => 1, 'likedCount' => Like::getCountLike($id)]);
+        } else {
+            $item = Like::where('post_id', $id)->where('ip', request()->ip())->first();
+            $item->delete();
+            return response()->json(['liked' => 0, 'likedCount' => Like::getCountLike($id)]);
         }
     }
 

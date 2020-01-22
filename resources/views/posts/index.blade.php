@@ -55,10 +55,10 @@
                                         {{ $item->created_at }}
                                     </td>
                                     <td>
-                                        L
+                                        {{ $item->countLikes }}
                                     </td>
                                     <td>
-                                        V
+                                        {{ $item->countViews }}
                                     </td>
                                     <td class="status">
                                         @if ($item->active)

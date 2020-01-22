@@ -53,3 +53,15 @@ img {
 .post .likes {
     margin-top: 30px;
 }
+
+.like-btn {
+    cursor: pointer;
+}
+
+.like-btn:hover {
+    color: red;
+}
+
+.like-btn.active {
+    color: red;
+}

@@ -15,6 +15,7 @@ Route::get('/', 'HomeController@main')->name('site.main');
 Route::get('/posts/{id}', 'PostController@show')->name('posts.show');
 Route::get('/user/{id}', 'PostController@byUser')->name('posts.user');
 Route::post('/posts/switch', 'PostController@switchPublish')->name('posts.switch');
+Route::post('/posts/like', 'PostController@like')->name('posts.like');
 
 Auth::routes();
 
