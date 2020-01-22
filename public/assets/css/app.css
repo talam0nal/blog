@@ -65,3 +65,12 @@ img {
 .like-btn.active {
     color: red;
 }
+
+.read-more-title {
+    font-size: 25px;
+    color: #000;
+}
+
+.read-more-title:hover {
+    text-decoration: none;
+}

@@ -70,10 +70,11 @@ class PostController extends Controller
     {
         $item = Post::findOrFail($id);
         $tags = $this->getTags($id);
-        $vars = compact('item', 'tags');
         $this->increaseViews($id);
         $item->countViews = View::getCountViews($id);
         $item->countLikes = Like::getCountLike($id);
+        $readMore = Post::where('category_id', $item->category_id)->whereNotIn('id', [$item->id])->take(5)->get();
+        $vars = compact('item', 'tags', 'readMore');
         return view('posts.show', $vars);
     }
 
