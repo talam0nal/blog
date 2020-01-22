@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $items = Comment::get();
@@ -42,12 +38,6 @@ class CommentController extends Controller
         return redirect()->route('posts.show', $request->postId);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $item = Comment::findOrFail($id);

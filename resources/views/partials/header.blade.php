@@ -2,7 +2,7 @@
     <div class="row">
         <nav class="col-sm-12">
             <a href="/" class="logo">Blog</a>
-            <a href="#">Категории</a>
+            <a href="{{ route('category.site.index') }}">Категории</a>
             <form class="form-inline search-input">
                 <input class="form-control mr-sm-2" type="search" placeholder="Поиск по сайту">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>

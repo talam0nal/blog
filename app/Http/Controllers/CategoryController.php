@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Post;
+use App\{Post, View, Like, Category};
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -21,6 +20,18 @@ class CategoryController extends Controller
         }
         $vars = compact('items');
         return view('categories.index', $vars);
+    }
+
+    public function siteIndex()
+    {
+        $posts = Post::whereActive(1)->paginate(10);
+        $categories = Category::get();
+        foreach ($posts as $post) {
+            $post->countViews = View::getCountViews($post->id);
+            $post->countLikes = Like::getCountLike($post->id);
+        }
+        $vars = compact('posts', 'categories');
+        return view('categories.site_index', $vars);      
     }
 
     /**
@@ -50,15 +61,16 @@ class CategoryController extends Controller
         return redirect()->route('categories.edit', $item->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $posts = Post::whereActive(1)->where('category_id', $id)->paginate(10);
+        $categories = Category::get();
+        foreach ($posts as $post) {
+            $post->countViews = View::getCountViews($post->id);
+            $post->countLikes = Like::getCountLike($post->id);
+        }
+        $vars = compact('posts', 'categories');
+        return view('categories.site_index', $vars);  
     }
 
     /**
