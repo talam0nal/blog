@@ -74,3 +74,15 @@ img {
 .read-more-title:hover {
     text-decoration: none;
 }
+
+.comments-block {
+    margin-bottom: 50px;
+}
+
+.comments-list {
+    margin-bottom: 30px;
+}
+
+.comment {
+    margin-bottom: 20px;
+}

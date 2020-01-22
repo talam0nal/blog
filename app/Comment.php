@@ -10,6 +10,7 @@ class Comment extends Model
         'text',
         'user_id',
         'active',
+        'post_id',
     ];
 
     public function user()

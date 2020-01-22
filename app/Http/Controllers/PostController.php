@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Post, Category, View, Like};
+use App\{Post, Category, View, Like, Comment};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,8 +49,9 @@ class PostController extends Controller
         $this->increaseViews($id);
         $item->countViews = View::getCountViews($id);
         $item->countLikes = Like::getCountLike($id);
+        $comments = Comment::whereActive(1)->get();
         $readMore = Post::where('category_id', $item->category_id)->whereNotIn('id', [$item->id])->take(5)->get();
-        $vars = compact('item', 'tags', 'readMore');
+        $vars = compact('item', 'tags', 'readMore', 'comments');
         return view('posts.show', $vars);
     }
 

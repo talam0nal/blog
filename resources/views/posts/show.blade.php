@@ -41,6 +41,45 @@
         </div>
     </div>
 
+    <div class="container comments-block">
+        <div class="row">
+            <div class="col-12">
+
+                @if (count($comments))
+                    <div class="comments-list">
+                        <h3>Комментарии</h3>
+                        @foreach ($comments as $comment)
+                            <div class="comment">
+                                {{ $comment->created_at }}, {{ $comment->user->name }}<br>
+                                {!! $comment->text !!}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                @auth
+                    <div class="alert alert-primary" role="alert">
+                        Комментарий станет доступен после модерации
+                    </div>
+
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="postId" value="{{ $item->id }}">
+                        <div class="form-group">
+                            <label for="text">Текст комментария:</label>
+                            <textarea class="form-control" id="text" rows="3" name="text" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Комментировать</button>
+                    </form>
+                    @else
+                        <div class="alert alert-primary" role="alert">
+                            Только авторизованнные пользователи могут оставлять комментарии
+                        </div>
+                @endauth
+            </div>
+        </div>
+    </div>
+
     @if (count($readMore))
         <div class="container">
             <div class="row">
