@@ -176,6 +176,7 @@ class PostController extends Controller
         $posts = Post::whereActive(1)->where('user_id', $id)->paginate(10);
         foreach ($posts as $post) {
             $post->countViews = View::getCountViews($post->id);
+            $post->countLikes = Like::getCountLike($post->id);
         }
         $vars = compact('posts');
         return view('posts.byuser', $vars);
