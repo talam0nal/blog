@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use App\Category;
-use App\View;
-use App\Like;
+use App\{Post, Category, View, Like};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $items = Post::get();
@@ -27,11 +20,6 @@ class PostController extends Controller
         return view('posts.index', $vars);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $item = false;
@@ -40,12 +28,6 @@ class PostController extends Controller
         return view('posts.create_edit', $vars);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $item = Post::create([
@@ -60,12 +42,6 @@ class PostController extends Controller
         return redirect()->route('posts.edit', $item->id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $item = Post::findOrFail($id);
@@ -113,12 +89,6 @@ class PostController extends Controller
         return explode(',', $list);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $item = Post::findOrFail($id);
@@ -127,13 +97,6 @@ class PostController extends Controller
         return view('posts.create_edit', $vars);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $item = Post::findOrFail($id);
@@ -158,12 +121,6 @@ class PostController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $item = Post::findOrFail($id);
