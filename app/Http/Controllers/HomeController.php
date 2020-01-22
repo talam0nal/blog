@@ -18,7 +18,7 @@ class HomeController extends Controller
             $post->countLikes = Like::getCountLike($post->id);
         }
         $vars = compact('posts');
-        return view('site.main', $vars);        
+        return view('site.main', $vars);
     }
 
 }

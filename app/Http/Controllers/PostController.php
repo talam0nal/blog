@@ -154,6 +154,21 @@ class PostController extends Controller
         return response()->json($item);
     }
 
+    public function search()
+    {
+        $q = request()->q;
+        $posts = Post::whereActive(1)
+                      ->where('title', 'like', '%'.$q.'%')
+                      ->orWhere('text', 'like', '%'.$q.'%')
+                      ->paginate(10);
+        foreach ($posts as $post) {
+            $post->countViews = View::getCountViews($post->id);
+            $post->countLikes = Like::getCountLike($post->id);
+        }
+        $vars = compact('posts');
+        return view('site.main', $vars);        
+    }
+
     /**
      * Загрузка картинки для редактора
     */

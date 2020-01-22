@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@main')->name('site.main');
 Route::get('/posts/{id}', 'PostController@show')->name('posts.show');
 Route::get('/user/{id}', 'PostController@byUser')->name('posts.user');
+Route::get('/search', 'PostController@search')->name('posts.search');
 Route::get('/categories', 'CategoryController@siteIndex')->name('category.site.index');
 Route::get('/category/{id}', 'CategoryController@show')->name('category.site.show');
 Route::post('/posts/like', 'PostController@like')->name('posts.like');
