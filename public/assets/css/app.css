@@ -1,51 +1,55 @@
 .register-block {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 form.create-edit {
-	margin-bottom: 75px;
+    margin-bottom: 75px;
 }
 
 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 .image-gap {
-	margin-top: 30px;
-	margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .search-input {
-	display: inline-block !important;
-	margin-left: 20px;
-	margin-right: 20px;
+    display: inline-block !important;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .main-menu {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 .logo {
-	color: #000;
-	font-size: 35px;
-	margin-right: 20px;
-	position: relative;
-	top: 3px;
+    color: #000;
+    font-size: 35px;
+    margin-right: 20px;
+    position: relative;
+    top: 3px;
 }
 
 .logo:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .content {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 .post {
-	margin-bottom: 35px;
+    margin-bottom: 35px;
 }
 
 .post .title {
-	font-size: 25px;
-	color: #000;
+    font-size: 25px;
+    color: #000;
+}
+
+.post .likes {
+    margin-top: 30px;
 }

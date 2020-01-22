@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
+use App\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -65,7 +66,20 @@ class PostController extends Controller
         $item = Post::findOrFail($id);
         $tags = $this->getTags($id);
         $vars = compact('item', 'tags');
+        $this->increaseViews($id);
+        $item->countViews = View::getCountViews($id);
         return view('posts.show', $vars);
+    }
+
+    private function increaseViews($id)
+    {
+        $viewed = View::where('post_id', $id)->where('ip', request()->ip())->count();
+        if (!$viewed) {
+            View::create([
+                'ip' => request()->ip(),
+                'post_id' => $id,
+            ]);
+        }
     }
 
     private function getTags($id)
@@ -137,6 +151,9 @@ class PostController extends Controller
     public function byUser($id)
     {
         $posts = Post::whereActive(1)->where('user_id', $id)->paginate(10);
+        foreach ($posts as $post) {
+            $post->countViews = View::getCountViews($post->id);
+        }
         $vars = compact('posts');
         return view('posts.byuser', $vars);
     }

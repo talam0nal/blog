@@ -18,7 +18,7 @@
                         @endif
                         <div class="row">
                             <div class="col-12">
-                                Мне нравится (0) Просмотров (0)
+                                Мне нравится (0) Просмотров ({{ $post->countViews }})
                                 <br>
                                 {{ $post->created_at }}
                                 <br>

@@ -1,6 +1,7 @@
 @extends ('layouts.layout')
 
 @section ('content')
+
 	@include ('partials.header')
 
 	<div class="container">
@@ -27,11 +28,15 @@
 				{!! $item->text !!}
 			</article>
 
-			<div class="col-12">
+			<div class="col-12 tags">
 				<a href="{{ route('posts.user', $item->user->id) }}">{{ $item->user->name }}</a><br><br>
 				@foreach ($tags as $tag)
 					<span class="badge badge-pill badge-info">{{ $tag }}</span>
 				@endforeach
+			</div>
+
+			<div class="col-12 likes">
+				Мне нравится (0) Просмотров ({{ $item->countViews }})
 			</div>
 		</div>
 
