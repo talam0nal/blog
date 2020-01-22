@@ -48,6 +48,7 @@
                     <h4>Читайте также</h4>
                     @foreach ($readMore as $item)
                         <a href="{{ route('posts.show', $item->id) }}" class="read-more-title">{{ $item->title }}</a>
+                        <br>
                         {{ $item->subtitle }}
                         @if ($item->preview)
                             <div class="row image-gap">
