@@ -113,7 +113,7 @@
                     e.preventDefault();
                     el = $(this);
                     var id = el.attr('data-id');
-                    $.post("{{ route('posts.switch') }}", { id: id})
+                    $.post("{{ route('posts.switch') }}", {id: id})
                     .done(function(data) {
                         console.log(data);
                         if (data.active == 0) {
