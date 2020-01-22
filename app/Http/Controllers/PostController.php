@@ -49,7 +49,7 @@ class PostController extends Controller
         $this->increaseViews($id);
         $item->countViews = View::getCountViews($id);
         $item->countLikes = Like::getCountLike($id);
-        $comments = Comment::whereActive(1)->get();
+        $comments = Comment::whereActive(1)->where('post_id', $id)->get();
         $readMore = Post::where('category_id', $item->category_id)->whereNotIn('id', [$item->id])->take(5)->get();
         $vars = compact('item', 'tags', 'readMore', 'comments');
         return view('posts.show', $vars);
