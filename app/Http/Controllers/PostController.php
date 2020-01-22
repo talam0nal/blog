@@ -11,7 +11,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $items = Post::get();
+        $items = Post::where('user_id', \Auth::id())->get();
         foreach ($items as $item) {
             $item->countLikes = Like::getCountLike($item->id);
             $item->countViews = View::getCountViews($item->id);
@@ -92,6 +92,9 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        if ($this->accessDenied($id)) {
+            abort(404);
+        }
         $item = Post::findOrFail($id);
         $categories = Category::get();
         $vars = compact('item', 'categories');
@@ -100,6 +103,9 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        if ($this->accessDenied($id)) {
+            abort(404);
+        }
         $item = Post::findOrFail($id);
         $item->update([
             'title'       => $request->title,
@@ -124,6 +130,9 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        if ($this->accessDenied($id)) {
+            abort(404);
+        }
         $item = Post::findOrFail($id);
         Storage::delete($item->preview);
         $item->delete();
@@ -143,6 +152,9 @@ class PostController extends Controller
 
     public function switchPublish()
     {
+        if ($this->accessDenied($id)) {
+            abort(404);
+        }
         $id = request()->id;
         $item = Post::findOrFail($id);
         if ($item->active == 1) {
@@ -166,7 +178,7 @@ class PostController extends Controller
             $post->countLikes = Like::getCountLike($post->id);
         }
         $vars = compact('posts');
-        return view('site.main', $vars);        
+        return view('site.main', $vars);
     }
 
     /**
@@ -182,6 +194,14 @@ class PostController extends Controller
             'message' => 'Image uploaded',
             'data' => ['link' => $url],
         ]);
+    }
+
+    private function accessDenied($id)
+    {
+        $post = Post::findOrFail($id);
+        if ($post->user_id !== \Auth::id()) {
+            return true;
+        }
     }
 
 }
