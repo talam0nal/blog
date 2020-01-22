@@ -7,9 +7,6 @@
             @include ('partials.menu')
 
             <div class="col-sm-9">
-                <a href="{{ route('posts.create') }}" class="btn btn-success">
-                    Создать новый пост
-                </a>
 
                 @if (count($items))
                     <table class="table">  
