@@ -29,7 +29,7 @@ class PostController extends Controller
     public function create()
     {
         $item = false;
-        $categories = Category::where('user_id', \Auth::id())->get();
+        $categories = Category::get();
         $vars = compact('item', 'categories');
         return view('posts.create_edit', $vars);
     }
@@ -84,7 +84,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $item = Post::findOrFail($id);
-        $categories = Category::where('user_id', \Auth::id())->get();
+        $categories = Category::get();
         $vars = compact('item', 'categories');
         return view('posts.create_edit', $vars);
     }

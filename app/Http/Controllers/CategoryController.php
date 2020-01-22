@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $items = Category::where('user_id', \Auth::id())->get();
+        $items = Category::get();
         foreach ($items as $item) {
             $item->publicationsCount = Post::where('category_id', $item->id)->count();
         }
