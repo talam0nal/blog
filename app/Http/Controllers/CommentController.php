@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
+use App\{Comment, Post};
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -10,7 +10,8 @@ class CommentController extends Controller
 
     public function index()
     {
-        $items = Comment::get();
+    	$posts = Post::where('user_id', \Auth::id())->get()->toArray();
+        $items = Comment::whereIn('post_id', $posts)->get();
         $vars = compact('items');
         return view('comments.index', $vars);
     }
